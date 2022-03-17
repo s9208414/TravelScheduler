@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 class RecyclerViewAdapter(private val data: ArrayList<Place>):RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     class ViewHolder(v: View): RecyclerView.ViewHolder(v){
         val tv_place = v.findViewById<TextView>(R.id.place)
-        val tv_expect = v.findViewById<TextView>(R.id.expect)
+        val tv_rank = v.findViewById<TextView>(R.id.rank)
     }
 
     override fun getItemCount() = data.size
@@ -23,7 +23,7 @@ class RecyclerViewAdapter(private val data: ArrayList<Place>):RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tv_place.text = data[position].place.toString()
-        holder.tv_expect.text = data[position].expect.toString()
+        holder.tv_rank.text = data[position].rank.toString()
 
     }
 }

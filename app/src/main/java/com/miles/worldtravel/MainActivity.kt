@@ -74,12 +74,12 @@ class MainActivity : AppCompatActivity() {
         var intent = Intent(this,SecondActivity::class.java)
         btn_send.setOnClickListener {
             try {
-                day = ed_day.text.toString().toInt()
+                this.day = ed_day.text.toString().toInt()
             }catch (e: Exception){
                 Toast.makeText(this,"請輸入天數",Toast.LENGTH_SHORT).show()
             }
 
-            if(ed_day.length()<1 || day == 0){
+            if(ed_day.length()<1 || this.day == 0){
                 Toast.makeText(this,"請輸入天數",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -279,7 +279,7 @@ class MainActivity : AppCompatActivity() {
         var expect = 1
         var score = 120
         for(i in this.placeList){
-            i.expect = expect
+            i.rank = expect
             i.score = score
             expect++
             score--
@@ -290,9 +290,7 @@ class MainActivity : AppCompatActivity() {
 
         var the2dArray: Array<Array<Int>> = Array(placeList.size+1, { Array(day+1, { 0 }) })
         var schedule: ArrayList<Place>
-        //Log.e("bag[0]",the2dArray[0].size.toString())
         for (i in 1 until placeList.size+1){
-            //Log.e("i",i.toString())
             for(j in 1 until day+1){
                 //Log.e("j",j.toString())
                 the2dArray[i][j] = the2dArray[i-1][j]
@@ -302,16 +300,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //Log.e("bag",the2dArray.toString())
-        schedule = track(the2dArray,day,placeList)
+        schedule = track(the2dArray,this.day,placeList)
         Log.e("result", schedule.toString())
 
 
     }
     fun track(the2dArray: Array<Array<Int>>,day: Int,placeList: ArrayList<Place>): ArrayList<Place> {
         var schedule: ArrayList<Place> = ArrayList<Place>()
-        for (i in placeList.size downTo 1){
+        for (i in placeList.size downTo 2){
             if(the2dArray[i][day] != the2dArray[i-1][day]){
                 schedule.add(placeList[i-1])
+                this.day -= placeList[i-1].consumeDay
             }
         }
         if(the2dArray[1][day] > 0){
@@ -322,7 +321,7 @@ class MainActivity : AppCompatActivity() {
 }
 data class Place(
     var place: String,
-    var expect: Int,
+    var rank: Int,
     var score: Int,
     var consumeDay: Int
 )
