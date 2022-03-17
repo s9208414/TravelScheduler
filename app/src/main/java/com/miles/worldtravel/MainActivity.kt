@@ -302,6 +302,8 @@ class MainActivity : AppCompatActivity() {
         //Log.e("bag",the2dArray.toString())
         schedule = track(the2dArray,this.day,placeList)
         Log.e("result", schedule.toString())
+        var b = Bundle()
+
 
 
     }
@@ -319,6 +321,7 @@ class MainActivity : AppCompatActivity() {
         return schedule
     }
 }
+
 data class Place(
     var place: String,
     var rank: Int,
