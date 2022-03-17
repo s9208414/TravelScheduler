@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     this.mutPlaceList.add(this.us)
                     this.placeList.add(Place(us,0, 0))
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("mutablePlaceList", mutPlaceList.toString())
                     Log.e("placeList", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                     this.placeList.remove(placeList[mutPlaceList.indexOf(this.us)-1])
                     this.mutPlaceList.remove(this.us)
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("mutablePlaceList", mutPlaceList.toString())
                     Log.e("placeList", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                     this.mutPlaceList.add(this.uk)
                     this.placeList.add(Place(uk,0, 0))
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("mutablePlaceList", mutPlaceList.toString())
                     Log.e("placeList", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                     this.placeList.remove(placeList[mutPlaceList.indexOf(this.uk)-1])
                     this.mutPlaceList.remove(this.uk)
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("mutablePlaceList", mutPlaceList.toString())
                     Log.e("placeList", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                     this.mutPlaceList.add(this.rus)
                     this.placeList.add(Place(rus,0, 0))
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                     this.placeList.remove(placeList[mutPlaceList.indexOf(this.rus)-1])
                     this.mutPlaceList.remove(this.rus)
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
                     this.mutPlaceList.add(this.ind)
                     this.placeList.add(Place(ind,0, 0))
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
                     this.placeList.remove(placeList[mutPlaceList.indexOf(this.ind)-1])
                     this.mutPlaceList.remove(this.ind)
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -162,7 +162,7 @@ class MainActivity : AppCompatActivity() {
                     this.mutPlaceList.add(this.eu)
                     this.placeList.add(Place(eu,0, 0))
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
                     this.placeList.remove(placeList[mutPlaceList.indexOf(this.eu)-1])
                     this.mutPlaceList.remove(this.eu)
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity() {
                     this.mutPlaceList.add(this.cn)
                     this.placeList.add(Place(cn,0, 0))
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity() {
                     this.placeList.remove(placeList[mutPlaceList.indexOf(this.cn)-1])
                     this.mutPlaceList.remove(this.cn)
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -206,7 +206,7 @@ class MainActivity : AppCompatActivity() {
                     this.mutPlaceList.add(this.aus)
                     this.placeList.add(Place(aus,0, 0))
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -215,7 +215,7 @@ class MainActivity : AppCompatActivity() {
                     this.placeList.remove(placeList[mutPlaceList.indexOf(this.aus)-1])
                     this.mutPlaceList.remove(this.aus)
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -228,7 +228,7 @@ class MainActivity : AppCompatActivity() {
                     this.mutPlaceList.add(this.af)
                     this.placeList.add(Place(af,0, 0))
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
@@ -237,7 +237,7 @@ class MainActivity : AppCompatActivity() {
                     this.placeList.remove(placeList[mutPlaceList.indexOf(this.af)-1])
                     this.mutPlaceList.remove(this.af)
                     arrayUpdate()
-                    Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
                     viewAdapter.notifyDataSetChanged()
                 }
