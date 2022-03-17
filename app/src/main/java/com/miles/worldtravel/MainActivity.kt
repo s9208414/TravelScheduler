@@ -1,12 +1,20 @@
 package com.miles.worldtravel
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.lang.Exception
+import java.lang.Integer.max
+import java.util.stream.IntStream.range
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewAdapter: RecyclerViewAdapter
@@ -32,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var uk: String
     lateinit var eu: String
     lateinit var ind: String
+    var day = 0
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -59,6 +69,27 @@ class MainActivity : AppCompatActivity() {
         rv_rank.addItemDecoration(decoration)
         rv_rank.layoutManager = LinearLayoutManager(this)
         rv_rank.adapter = viewAdapter
+        val btn_send = findViewById<Button>(R.id.btn_send)
+        val ed_day = findViewById<EditText>(R.id.ed_day)
+        var intent = Intent(this,SecondActivity::class.java)
+        btn_send.setOnClickListener {
+            try {
+                day = ed_day.text.toString().toInt()
+            }catch (e: Exception){
+                Toast.makeText(this,"請輸入天數",Toast.LENGTH_SHORT).show()
+            }
+
+            if(ed_day.length()<1 || day == 0){
+                Toast.makeText(this,"請輸入天數",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if(placeList.isEmpty()){
+                Toast.makeText(this,"請選擇景點",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            calculate()
+        }
     }
 
     override fun onStart() {
@@ -68,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             if(ischecked){
                 if(this.us !in this.mutPlaceList){
                     this.mutPlaceList.add(this.us)
-                    this.placeList.add(Place(us,0, 0))
+                    this.placeList.add(Place(us,0, 0,15))
                     arrayUpdate()
                     //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("mutablePlaceList", mutPlaceList.toString())
@@ -92,7 +123,7 @@ class MainActivity : AppCompatActivity() {
             if(ischecked){
                 if(this.uk !in this.mutPlaceList){
                     this.mutPlaceList.add(this.uk)
-                    this.placeList.add(Place(uk,0, 0))
+                    this.placeList.add(Place(uk,0, 0,12))
                     arrayUpdate()
                     //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("mutablePlaceList", mutPlaceList.toString())
@@ -116,7 +147,7 @@ class MainActivity : AppCompatActivity() {
             if(ischecked){
                 if(this.rus !in this.mutPlaceList){
                     this.mutPlaceList.add(this.rus)
-                    this.placeList.add(Place(rus,0, 0))
+                    this.placeList.add(Place(rus,0, 0,20))
                     arrayUpdate()
                     //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
@@ -138,7 +169,7 @@ class MainActivity : AppCompatActivity() {
             if(ischecked){
                 if(this.ind !in this.mutPlaceList){
                     this.mutPlaceList.add(this.ind)
-                    this.placeList.add(Place(ind,0, 0))
+                    this.placeList.add(Place(ind,0, 0,9))
                     arrayUpdate()
                     //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
@@ -160,7 +191,7 @@ class MainActivity : AppCompatActivity() {
             if(ischecked){
                 if(this.eu !in this.mutPlaceList){
                     this.mutPlaceList.add(this.eu)
-                    this.placeList.add(Place(eu,0, 0))
+                    this.placeList.add(Place(eu,0, 0,11))
                     arrayUpdate()
                     //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
@@ -182,7 +213,7 @@ class MainActivity : AppCompatActivity() {
             if(ischecked){
                 if(this.cn !in this.mutPlaceList){
                     this.mutPlaceList.add(this.cn)
-                    this.placeList.add(Place(cn,0, 0))
+                    this.placeList.add(Place(cn,0, 0,12))
                     arrayUpdate()
                     //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
@@ -204,7 +235,7 @@ class MainActivity : AppCompatActivity() {
             if(ischecked){
                 if(this.aus !in this.mutPlaceList){
                     this.mutPlaceList.add(this.aus)
-                    this.placeList.add(Place(aus,0, 0))
+                    this.placeList.add(Place(aus,0, 0,10))
                     arrayUpdate()
                     //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
@@ -226,7 +257,7 @@ class MainActivity : AppCompatActivity() {
             if(ischecked){
                 if(this.af !in this.mutPlaceList){
                     this.mutPlaceList.add(this.af)
-                    this.placeList.add(Place(af,0, 0))
+                    this.placeList.add(Place(af,0, 0,25))
                     arrayUpdate()
                     //Toast.makeText(this,"目前已選擇:$placeList", Toast.LENGTH_SHORT).show()
                     Log.e("已選", placeList.toString())
@@ -254,9 +285,44 @@ class MainActivity : AppCompatActivity() {
             score--
         }
     }
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun calculate(){
+
+        var the2dArray: Array<Array<Int>> = Array(placeList.size+1, { Array(day+1, { 0 }) })
+        var schedule: ArrayList<Place>
+        //Log.e("bag[0]",the2dArray[0].size.toString())
+        for (i in 1 until placeList.size+1){
+            //Log.e("i",i.toString())
+            for(j in 1 until day+1){
+                //Log.e("j",j.toString())
+                the2dArray[i][j] = the2dArray[i-1][j]
+                if(j >= placeList[i-1].consumeDay){
+                    the2dArray[i][j] = max(the2dArray[i-1][j-placeList[i-1].consumeDay] + placeList[i-1].score,the2dArray[i-1][j])
+                }
+            }
+        }
+        //Log.e("bag",the2dArray.toString())
+        schedule = track(the2dArray,day,placeList)
+        Log.e("result", schedule.toString())
+
+
+    }
+    fun track(the2dArray: Array<Array<Int>>,day: Int,placeList: ArrayList<Place>): ArrayList<Place> {
+        var schedule: ArrayList<Place> = ArrayList<Place>()
+        for (i in placeList.size downTo 1){
+            if(the2dArray[i][day] != the2dArray[i-1][day]){
+                schedule.add(placeList[i-1])
+            }
+        }
+        if(the2dArray[1][day] > 0){
+            schedule.add(placeList[0])
+        }
+        return schedule
+    }
 }
 data class Place(
     var place: String,
     var expect: Int,
-    var score: Int
+    var score: Int,
+    var consumeDay: Int
 )
