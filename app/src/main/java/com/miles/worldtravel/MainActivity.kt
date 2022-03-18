@@ -1,5 +1,6 @@
 package com.miles.worldtravel
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -43,6 +44,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var eu: String
     lateinit var ind: String
     var day = 0
+
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +94,7 @@ class MainActivity : AppCompatActivity() {
 
             calculate()
         }
+
     }
 
     override fun onStart() {
@@ -313,6 +317,7 @@ class MainActivity : AppCompatActivity() {
         b.putString("sum",sum.toString())
         intent.putExtra("bundle",b)
         try{
+            finish()
             startActivity(intent)
         }catch(e:Exception){
             Log.e("e",e.toString())
@@ -334,6 +339,11 @@ class MainActivity : AppCompatActivity() {
             schedule.add(placeList[0])
         }
         return schedule
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+        System.exit(0)
     }
 }
 

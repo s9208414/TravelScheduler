@@ -27,6 +27,7 @@ class SecondActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
+        //MainActivity.mainActivity.mActivity.finish()
         Log.e("jump","已跳轉")
         decoration = RecyclerViewItemSpace()
         rv_rank_second = findViewById<RecyclerView>(R.id.rv_rank_second)
@@ -65,9 +66,19 @@ class SecondActivity : AppCompatActivity()  {
         }
         val btn_back = findViewById<Button>(R.id.btn_back)
         btn_back.setOnClickListener {
+            //var mAct = MainActivity()
             val intent = Intent(this,MainActivity::class.java)
+            finish()
             startActivity(intent)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        //var mAct = MainActivity()
+        val intent = Intent(this,MainActivity::class.java)
+        finish()
+        startActivity(intent)
     }
 
 }
