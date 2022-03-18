@@ -46,9 +46,9 @@
         <TextView
             android:id="@+id/tv_hint"
             android:textSize="11sp"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="附註: 選項後面的數字為遊玩該地區所需花費天數"
+            android:text="附註: 選項後面的數字為遊玩該地區所需花費天數，並且根據您點選的順序作為最想去該景點的順序。"
             app:layout_constraintBottom_toTopOf="@+id/cb_us"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

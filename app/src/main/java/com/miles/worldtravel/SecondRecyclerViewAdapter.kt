@@ -1,5 +1,6 @@
 package com.miles.worldtravel
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,22 +10,26 @@ import androidx.recyclerview.widget.RecyclerView
 class SecondRecyclerViewAdapter (private val data: ArrayList<Place>): RecyclerView.Adapter<SecondRecyclerViewAdapter.ViewHolder>() {
     class ViewHolder(v: View): RecyclerView.ViewHolder(v){
         val tv_place = v.findViewById<TextView>(R.id.place)
-        val tv_rank = v.findViewById<TextView>(R.id.rank)
+        val tv_consumeDay = v.findViewById<TextView>(R.id.rank)
     }
 
-    override fun getItemCount() = data.size
+    override fun getItemCount():Int{
+        Log.e("data2.size",data.size.toString())
+        return data.size
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             ViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.adapter_row, parent, false)
+        Log.e("建構2",true.toString())
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tv_place.text = data[position].place.toString()
-        holder.tv_rank.text = data[position].rank.toString()
-
+        holder.tv_consumeDay.text = data[position].consumeDay.toString()+"天"
+        Log.e("渲染2",true.toString())
     }
 
 }

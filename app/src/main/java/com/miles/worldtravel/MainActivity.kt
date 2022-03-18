@@ -3,6 +3,7 @@ package com.miles.worldtravel
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
@@ -12,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.parcelize.Parcelize
 import java.lang.Exception
 import java.lang.Integer.max
 import java.util.stream.IntStream.range
@@ -71,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         rv_rank.adapter = viewAdapter
         val btn_send = findViewById<Button>(R.id.btn_send)
         val ed_day = findViewById<EditText>(R.id.ed_day)
-        var intent = Intent(this,SecondActivity::class.java)
         btn_send.setOnClickListener {
             try {
                 this.day = ed_day.text.toString().toInt()
@@ -287,7 +288,7 @@ class MainActivity : AppCompatActivity() {
     }
     @RequiresApi(Build.VERSION_CODES.N)
     fun calculate(){
-
+        var sum = 0
         var the2dArray: Array<Array<Int>> = Array(placeList.size+1, { Array(day+1, { 0 }) })
         var schedule: ArrayList<Place>
         for (i in 1 until placeList.size+1){
@@ -300,19 +301,33 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //Log.e("bag",the2dArray.toString())
+
         schedule = track(the2dArray,this.day,placeList)
         Log.e("result", schedule.toString())
         var b = Bundle()
+        var intent = Intent(this,SecondActivity::class.java)
+        Log.e("day",this.day.toString())
+        b.putParcelableArrayList("schedule",schedule)
+        b.putString("day",this.day.toString())
+        schedule.forEach { sum+=it.consumeDay }
+        b.putString("sum",sum.toString())
+        intent.putExtra("bundle",b)
+        try{
+            startActivity(intent)
+        }catch(e:Exception){
+            Log.e("e",e.toString())
+        }
 
 
 
     }
     fun track(the2dArray: Array<Array<Int>>,day: Int,placeList: ArrayList<Place>): ArrayList<Place> {
         var schedule: ArrayList<Place> = ArrayList<Place>()
+        var day = this.day
         for (i in placeList.size downTo 2){
             if(the2dArray[i][day] != the2dArray[i-1][day]){
                 schedule.add(placeList[i-1])
-                this.day -= placeList[i-1].consumeDay
+                day -= placeList[i-1].consumeDay
             }
         }
         if(the2dArray[1][day] > 0){
@@ -322,9 +337,10 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+@Parcelize
 data class Place(
     var place: String,
     var rank: Int,
     var score: Int,
     var consumeDay: Int
-)
+) : Parcelable
